@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">InventoryApp</string>
+
+    <string name="search_button_text">Search</string>
+
+    <string name="fab_content_desc">Add Inventory</string>
+    <string name="fab_text">+</string>
+
+    <string name="sale_button_text">Sale!</string>
+</resources>
