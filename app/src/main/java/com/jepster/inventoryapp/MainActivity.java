@@ -2,11 +2,15 @@ package com.jepster.inventoryapp;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -67,5 +71,37 @@ public class MainActivity extends AppCompatActivity implements LoaderManager
     protected void onDestroy() {
         super.onDestroy();
         LoaderManager.getInstance(this).destroyLoader(INVENTORY_LOADER);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        final int actionDeleteAll = R.id.action_delete_all_things;
+        if (menuItem.getItemId() == actionDeleteAll) {
+            int deletedRows = getContentResolver()
+                    .delete(
+                            InventoryEntry.CONTENT_URI,
+                            null,
+                            null
+                    );
+            Toast.makeText(
+                    this,
+                    String.format(
+                            getResources()
+                            .getConfiguration()
+                            .getLocales()
+                            .get(0),
+                            "%d row(s) deleted.",
+                            deletedRows),
+                    Toast.LENGTH_SHORT)
+                    .show();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 }

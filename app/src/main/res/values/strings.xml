@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InventoryApp</string>
+    <string name="app_name">Inventory App</string>
 
     <string name="search_button_text">Search</string>
 
@@ -7,4 +7,15 @@
     <string name="fab_text">+</string>
 
     <string name="sale_button_text">Sale!</string>
+
+    <string name="action_delete_all_things">Delete All</string>
+
+    <string name="editor_label_name">Item Name</string>
+    <string name="editor_label_quantity">Quantity</string>
+    <string name="editor_label_price">Price</string>
+    <string name="editor_label_inc_quantity">+</string>
+    <string name="editor_label_dec_quantity">-</string>
+
+    <string name="add_item_title">Add an Item</string>
+    <string name="edit_item_title">Edit an Item</string>
 </resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".EditorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/editor_name_text_edit"
+            android:text="@string/editor_label_name" />
+
+        <EditText
+            android:id="@+id/editor_name_text_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/editor_quantity_text_editor"
+            android:text="@string/editor_label_quantity"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/editor_quantity_label_tv"/>
+
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:text="@string/editor_label_dec_quantity"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/editor_quantity_label_tv"
+            android:id="@+id/editor_quantity_dec_button" />
+
+        <EditText
+            android:id="@+id/editor_quantity_text_editor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:inputType="number"
+            tools:text="999"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/editor_quantity_dec_button"/>
+
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:text="@string/editor_label_inc_quantity"
+            android:id="@+id/editor_quantity_inc_button"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/editor_quantity_text_editor"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/editor_label_price"
+            android:id="@+id/editor_price_label_tv"
+            android:labelFor="@id/editor_price_text_edit"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="@null"
+            android:id="@+id/editor_price_text_edit"
+            android:inputType="numberDecimal"
+            tools:text="999.99"/>
+
+    </LinearLayout>
+
+</LinearLayout>
