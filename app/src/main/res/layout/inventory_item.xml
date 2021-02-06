@@ -41,7 +41,13 @@
             android:id="@+id/inventory_item_sale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sale_button_text" />
+            android:text="@string/sale_button_text"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/inventory_item_id"
+        android:visibility="gone" />
 
 </LinearLayout>

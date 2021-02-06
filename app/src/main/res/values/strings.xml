@@ -18,4 +18,11 @@
 
     <string name="add_item_title">Add an Item</string>
     <string name="edit_item_title">Edit an Item</string>
+
+    <string name="unsaved_changes_dialog_message">You have made unsaved changes.</string>
+    <string name="discard">Discard Changes</string>
+    <string name="keep_editing">Keep Editing</string>
+
+    <string name="action_save">&#10003;</string>
+    <string name="action_delete">Delete</string>
 </resources>

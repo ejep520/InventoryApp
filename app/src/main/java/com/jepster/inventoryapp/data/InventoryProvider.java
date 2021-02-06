@@ -88,33 +88,51 @@ public class InventoryProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return insertThing(uri, values);
+        Uri returnValue = insertThing(uri, values);
+        if (ContentUris.parseId(returnValue) > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return returnValue;
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection,
                       @Nullable String[] selectionArgs) {
+        int returnValue;
         switch (matcher.match(uri)) {
             case THINGS:
-                return deleteThings(uri, selection, selectionArgs);
+                returnValue = deleteThings(uri, selection, selectionArgs);
+                break;
             case THING_ID:
-                return deleteThingId(uri, selection, selectionArgs);
+                returnValue =  deleteThingId(uri, selection, selectionArgs);
+                break;
             default:
                 throw new IllegalArgumentException("Unable to parse URI " + uri);
         }
+        if (returnValue > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return returnValue;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
                       @Nullable String[] selectionArgs) {
+        int returnValue;
         switch(matcher.match(uri)) {
             case THINGS:
-                return updateThings(values, selection, selectionArgs);
+                returnValue = updateThings(values, selection, selectionArgs);
+                break;
             case THING_ID:
-                return updateThingId(uri, values);
+                returnValue = updateThingId(uri, values);
+                break;
             default:
                 throw new IllegalArgumentException("Unable to parse URI " + uri);
         }
+        if (returnValue > 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return returnValue;
     }
 
     private Uri insertThing(Uri uri, ContentValues values) {

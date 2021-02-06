@@ -1,5 +1,6 @@
 package com.jepster.inventoryapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,19 +11,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.jepster.inventoryapp.data.InventoryAdapter;
 import com.jepster.inventoryapp.data.InventoryContract.InventoryEntry;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager
         .LoaderCallbacks<Cursor> {
 
     private final int INVENTORY_LOADER = 0;
     private ListView mListView;
+    private Locale mLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +35,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager
         setContentView(R.layout.activity_main);
 
         mListView = findViewById(R.id.list_view);
+        mLocale = getResources().getConfiguration().getLocales().get(0);
+
         mListView.setAdapter(new InventoryAdapter(this, null, 0));
         LoaderManager.getInstance(this).initLoader(INVENTORY_LOADER, null, this);
+
+        FloatingActionButton fab = findViewById(R.id.inventory_fab);
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+            startActivity(intent);
+        });
     }
 
     @NonNull
@@ -59,18 +72,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        ((InventoryAdapter)mListView.getAdapter()).changeCursor(data);
+        ((InventoryAdapter) mListView.getAdapter()).changeCursor(data);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        ((InventoryAdapter)mListView.getAdapter()).changeCursor(null);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LoaderManager.getInstance(this).destroyLoader(INVENTORY_LOADER);
+        ((InventoryAdapter) mListView.getAdapter()).changeCursor(null);
     }
 
     @Override
@@ -92,10 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager
             Toast.makeText(
                     this,
                     String.format(
-                            getResources()
-                            .getConfiguration()
-                            .getLocales()
-                            .get(0),
+                            mLocale,
                             "%d row(s) deleted.",
                             deletedRows),
                     Toast.LENGTH_SHORT)
@@ -103,5 +107,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LoaderManager.getInstance(this).destroyLoader(INVENTORY_LOADER);
     }
 }
